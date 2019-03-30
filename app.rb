@@ -37,7 +37,7 @@ beetle = Car.new(
 # Method that calculates the number of cars that can be created
 def calculate_total_cars(car)
   if car.name == "Golf"
-    tires = Inventory.continental_tires.to_i/4
+    tires = Inventory.continental_tires/4
     motor = Inventory.motors_with_turbo
     transmission = Inventory.manual_transmissions
     doors = Inventory.doors/car.doors
