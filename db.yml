@@ -1,0 +1,5 @@
+host:     '104.248.190.104'
+adapter:  'postgresql'
+database: 'team_5'
+username: 'team_5'
+password: 'ZCUWRLJA'
