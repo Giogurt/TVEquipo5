@@ -25,6 +25,19 @@ car = Car.new(
   style:        "Sedan"
 )
 
+def crearCarro(carro,cantidad)
+  arrCarro = []
+  i = 0
+  loop do
+    arrCarro.push(carro)
+    i++
+    if i == cantidad-1
+      break
+    end
+  end
+  return arrCarro
+end
+
 # Post result to validator
 result = Transport.post_result(
   team:       1,
