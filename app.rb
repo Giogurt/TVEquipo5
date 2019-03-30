@@ -4,7 +4,7 @@ include CarFactory
 
 # Database connection
 Database.load(db_file: 'db.yml')
-
+#prueba
 # Which fields are available
 puts Inventory.continental_tires
 puts Inventory.michelin_tires
