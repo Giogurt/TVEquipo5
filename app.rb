@@ -13,7 +13,7 @@ puts "Doors #{Inventory.doors}"
 puts "Manual #{Inventory.manual_transmissions}"
 puts "Automatic #{Inventory.automatic_transmissions}"
 
-# Crear un carro Golf
+# Create a Golf car
 golf = Car.new(
   brand:        "Volkswagen",
   name:         "Golf",
@@ -24,7 +24,7 @@ golf = Car.new(
   style:        "Hashback"
 )
 
-# Crear un carro Beetle
+# Create a Beetle car
 beetle = Car.new(
   brand:        "Volkswagen",
   name:         "Beetle",
@@ -34,32 +34,30 @@ beetle = Car.new(
   doors:        4,
   style:        "Sedan"
 )
-
-# Metodo que calcula la cantidad de carros que se pueden crear
-def calcular_total(carro)
-  if carro.name == "Golf"
-    tires = Integer(Inventory.continental_tires).to_i/4
+# Method that calculates the number of cars that can be created
+def calculate_total_cars(car)
+  if car.name == "Golf"
+    tires = Inventory.continental_tires.to_i/4
     motor = Inventory.motors_with_turbo
     transmission = Inventory.manual_transmissions
-    doors = Inventory.doors/carro.doors
+    doors = Inventory.doors/car.doors
   else
-    tires = Integer(Inventory.michelin_tires)/4
+    tires = Inventory.michelin_tires/4
     motor = Inventory.motors_with_no_turbo
     transmission = Inventory.automatic_transmissions
-    doors = Inventory.doors/carro.doors
+    doors = Inventory.doors/car.doors
   end
-  cantidad = [tires, motor, transmission, doors].min
+  quantity = [tires, motor, transmission, doors].min
 end
-#Guardar el total de carros que podemos fabricar
-total = calcular_total(golf)
-#Genera el arreglo del carro especificado
-arreglo_carros = Array.new(total, golf)
+
+total = calculate_total_cars(beetle)
+array_cars = Array.new(total, beetle)
 
 # Post result to validator
 result = Transport.post_result(
   team:       5,
   total:      total,
-  cars:       arreglo_carros
+  cars:       array_cars
 )
 
 puts result.body.inspect
