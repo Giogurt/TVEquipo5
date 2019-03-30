@@ -25,13 +25,14 @@ car = Car.new(
   style:        "Sedan"
 )
 
+# Metodo que crea un arreglo de multiples copias de un mismo carro
 def crearCarro(carro,cantidad)
   arrCarro = []
   i = 0
   loop do
     arrCarro.push(carro)
     i++
-    if i == cantidad-1
+    if i == cantidad
       break
     end
   end
