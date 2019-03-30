@@ -4,26 +4,14 @@ include CarFactory
 
 # Database connection
 Database.load(db_file: 'db.yml')
-#prueba
 # Which fields are available
-puts Inventory.continental_tires
-puts Inventory.michelin_tires
-puts Inventory.motors_with_turbo
-puts Inventory.motors_with_no_turbo
-puts Inventory.doors
-puts Inventory.manual_transmissions
-puts Inventory.automatic_transmissions
-
-# How to build a car object
-# car = Car.new(
-#   brand:        "Mercedes",
-#   name:         "Citan",
-#   tires:        "Continental",
-#   motor:        "Turbo 2.5",
-#   transmission: "Manual",
-#   doors:        2,
-#   style:        "Sedan"
-# )
+puts "Continental: #{Inventory.continental_tires}"
+puts "Michelin #{Inventory.michelin_tires}"
+puts "Turbo #{Inventory.motors_with_turbo}"
+puts "No turbo #{Inventory.motors_with_no_turbo}"
+puts "Doors #{Inventory.doors}"
+puts "Manual #{Inventory.manual_transmissions}"
+puts "Automatic #{Inventory.automatic_transmissions}"
 
 # Crear un carro Golf
 golf = Car.new(
@@ -31,12 +19,12 @@ golf = Car.new(
   name:         "Golf",
   tires:        "Continental",
   motor:        "Turbo 2.5",
-  transmision:  "Manual",
+  transmission:  "Manual",
   doors:        5,
   style:        "Hashback"
 )
 
-# Crear un carro Beatle
+# Crear un carro Beetle
 beetle = Car.new(
   brand:        "Volkswagen",
   name:         "Beetle",
@@ -48,42 +36,31 @@ beetle = Car.new(
 )
 
 # Metodo que calcula la cantidad de carros que se pueden crear
-def calcular(carro)
-  if carro.name = "Golf"
-    tires = Inventory.continental_tires/carro.tires
+def calcular_total(carro)
+  if carro.name == "Golf"
+    tires = Integer(Inventory.continental_tires).to_i/4
     motor = Inventory.motors_with_turbo
-    transmision = Inventory.manual_transmissions
+    transmission = Inventory.manual_transmissions
     doors = Inventory.doors/carro.doors
   else
-    tires = Inventory.michelin_tires/carro.tires
+    tires = Integer(Inventory.michelin_tires)/4
     motor = Inventory.motors_with_no_turbo
-    transmision = Inventory.automatic_transmissions
+    transmission = Inventory.automatic_transmissions
     doors = Inventory.doors/carro.doors
   end
-  cantidad = [tires, motor, transmision, doors].min
-  puts cantidad
-  return cantidad
+  cantidad = [tires, motor, transmission, doors].min
+  cantidad
 end
-
-# Metodo que crea un arreglo de multiples copias de un mismo carro
-def crearCarro(carro,cantidad)
-  arrCarro = []
-  i = 0
-  loop do
-    arrCarro.push(carro)
-    i++
-    if i == cantidad
-      break
-    end
-  end
-  return arrCarro
-end
+#Guardar el total de carros que podemos fabricar
+total = calcular_total(golf)
+#Genera el arreglo del carro especificado
+arreglo_carros = Array.new(total, golf)
 
 # Post result to validator
 result = Transport.post_result(
   team:       5,
-  total:      calcular(golf),
-  cars:       [crearCarro(golf,calcular(golf))]
+  total:      total,
+  cars:       arreglo_carros
 )
 
 puts result.body.inspect
