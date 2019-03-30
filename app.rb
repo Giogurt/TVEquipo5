@@ -49,7 +49,6 @@ def calcular_total(carro)
     doors = Inventory.doors/carro.doors
   end
   cantidad = [tires, motor, transmission, doors].min
-  cantidad
 end
 #Guardar el total de carros que podemos fabricar
 total = calcular_total(golf)
