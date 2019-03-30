@@ -81,9 +81,9 @@ end
 
 # Post result to validator
 result = Transport.post_result(
-  team:       1,
-  total:      1,
-  cars:       [car]
+  team:       5,
+  total:      calcular(golf),
+  cars:       [crearCarro(golf,calcular(golf))]
 )
 
 puts result.body.inspect
