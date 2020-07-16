@@ -1,7 +1,7 @@
 require 'car_factory'
 
 include CarFactory
-
+#cambio
 # Database connection
 Database.load(db_file: 'db.yml')
 # Which fields are available
